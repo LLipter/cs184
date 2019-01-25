@@ -15,6 +15,12 @@ using namespace CGL;
  * Write your own matrix vector multiplication function. Do not use the built-in CGL function!
  */
 Vector3D mult(Matrix3x3 mat, Vector3D input) {
+  double x = input.x;
+  double y = input.y;
+  double z = input.z;
+  input.x = mat[0][0] * x + mat[0][1] * y + mat[0][2] * z;
+  input.y = mat[1][0] * x + mat[1][1] * y + mat[1][2] * z;
+  input.z = mat[2][0] * x + mat[2][1] * y + mat[2][2] * z;
   return input; // FIXME
 }
 
@@ -36,7 +42,7 @@ class TriangleDrawer : public Renderer {
   void init() {
     return;
   }
-  
+
   void render() {
     glBegin(GL_TRIANGLES);
     glColor3f( 1.0, 1.0, 0.0);
@@ -51,16 +57,16 @@ class TriangleDrawer : public Renderer {
   }
 
   void resize(size_t w, size_t h) {
-    
+
     this->w = w;
     this->h = h;
 
     return;
   }
-  
+
  private:
   // frame buffer size
-  size_t w, h; 
+  size_t w, h;
   Matrix3x3 mat;
   Vector3D a;
   Vector3D b;
